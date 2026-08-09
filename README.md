@@ -293,7 +293,6 @@ Through this project, the following concepts were implemented:
 ### 👩‍💻 *Author* 
 
 Aditi Thakare
-Blood Donation System Project
 
 ---
 
