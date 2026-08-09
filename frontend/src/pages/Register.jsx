@@ -28,7 +28,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/donors",
+        "http://https://blood-donation-backend-xyth.onrender.com/api/donors",
         {
           method: "POST",
           headers: {

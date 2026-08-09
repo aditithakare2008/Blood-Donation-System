@@ -31,7 +31,7 @@ function Dashboard() {
         // ===============================
 
         const statsResponse = await fetch(
-          "http://localhost:5000/api/dashboard/stats",
+          "http://https://blood-donation-backend-xyth.onrender.com/api/dashboard/stats",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ function Dashboard() {
         // ===============================
 
         const requestsResponse = await fetch(
-          "http://localhost:5000/api/requests",
+          "http://https://blood-donation-backend-xyth.onrender.com/api/requests",
           {
             headers: {
               Authorization: `Bearer ${token}`,

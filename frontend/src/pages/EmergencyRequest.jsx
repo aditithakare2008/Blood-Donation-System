@@ -37,7 +37,7 @@ function EmergencyRequest() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/requests",
+        "http://https://blood-donation-backend-xyth.onrender.com/api/requests",
         {
           method: "POST",
           headers: {

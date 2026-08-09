@@ -31,7 +31,7 @@ function Profile() {
       const newAvailability = !donor.isAvailable;
 
       const response = await fetch(
-        `http://localhost:5000/api/donors/${donorId}/availability`,
+        `http://https://blood-donation-backend-xyth.onrender.com/api/donors/${donorId}/availability`,
         {
           method: "PUT",
           headers: {

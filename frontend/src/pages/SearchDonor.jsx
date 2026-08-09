@@ -24,7 +24,7 @@ function SearchDonor() {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/donors?${params.toString()}`
+        `http://https://blood-donation-backend-xyth.onrender.com/api/donors?${params.toString()}`
       );
 
       if (!response.ok) {
