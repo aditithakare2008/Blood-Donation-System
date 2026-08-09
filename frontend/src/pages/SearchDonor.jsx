@@ -24,7 +24,7 @@ function SearchDonor() {
       }
 
       const response = await fetch(
-        `http://https://blood-donation-backend-xyth.onrender.com/api/donors?${params.toString()}`
+        `https://blood-donation-backend-xyth.onrender.com/api/donors?${params.toString()}`
       );
 
       if (!response.ok) {
@@ -33,13 +33,12 @@ function SearchDonor() {
 
       const data = await response.json();
 
-      // Extra safety: show ONLY available donors
+      // Show only available donors
       const availableDonors = data.filter(
         (donor) => donor.isAvailable === true
       );
 
       setDonors(availableDonors);
-
     } catch (error) {
       console.error("Search donor error:", error);
       setDonors([]);
@@ -50,13 +49,11 @@ function SearchDonor() {
 
   return (
     <div className="container mt-5">
-
       <h2 className="text-center text-danger mb-4">
         Search Blood Donors
       </h2>
 
       <div className="row mb-4">
-
         <div className="col-md-6">
           <input
             type="text"
@@ -94,23 +91,18 @@ function SearchDonor() {
             {loading ? "Searching..." : "Search"}
           </button>
         </div>
-
       </div>
 
       <div className="row">
-
         {loading ? (
           <h4 className="text-center">
             Searching donors...
           </h4>
-
         ) : !searched ? (
           <h5 className="text-center text-muted">
             Enter a city or select a blood group to search.
           </h5>
-
         ) : donors.length > 0 ? (
-
           donors.map((donor) => (
             <div
               className="col-md-4 mb-4"
@@ -124,17 +116,12 @@ function SearchDonor() {
               />
             </div>
           ))
-
         ) : (
-
           <h4 className="text-center text-danger">
             No available donors found.
           </h4>
-
         )}
-
       </div>
-
     </div>
   );
 }

@@ -24,7 +24,6 @@ function EmergencyRequest() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setMessage("");
 
     try {
@@ -32,12 +31,14 @@ function EmergencyRequest() {
 
       if (!token) {
         setSuccess(false);
-        setMessage("Please login before submitting a blood request.");
+        setMessage(
+          "Please login before submitting a blood request."
+        );
         return;
       }
 
       const response = await fetch(
-        "http://https://blood-donation-backend-xyth.onrender.com/api/requests",
+        "https://blood-donation-backend-xyth.onrender.com/api/requests",
         {
           method: "POST",
           headers: {
@@ -55,12 +56,16 @@ function EmergencyRequest() {
 
       if (!response.ok) {
         throw new Error(
-          data.message || data.error || "Failed to submit request."
+          data.message ||
+            data.error ||
+            "Failed to submit request."
         );
       }
 
       setSuccess(true);
-      setMessage("Emergency blood request submitted successfully! 🩸");
+      setMessage(
+        "Emergency blood request submitted successfully! 🩸"
+      );
 
       setFormData({
         recipientName: "",
@@ -84,130 +89,124 @@ function EmergencyRequest() {
       className="container mt-5"
       style={{ maxWidth: "700px" }}
     >
-      <div className="card shadow p-4">
+      <h2 className="text-center text-danger mb-4">
+        Emergency Blood Request
+      </h2>
 
-        <h2 className="text-center text-danger mb-4">
-          Emergency Blood Request
-        </h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="recipientName"
+          className="form-control mb-3"
+          placeholder="Patient Name"
+          value={formData.recipientName}
+          onChange={handleChange}
+          required
+        />
 
-        <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="hospitalName"
+          className="form-control mb-3"
+          placeholder="Hospital Name"
+          value={formData.hospitalName}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="text"
-            name="recipientName"
-            className="form-control mb-3"
-            placeholder="Patient Name"
-            value={formData.recipientName}
-            onChange={handleChange}
-            required
-          />
+        <input
+          type="text"
+          name="location"
+          className="form-control mb-3"
+          placeholder="City / Location"
+          value={formData.location}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="text"
-            name="hospitalName"
-            className="form-control mb-3"
-            placeholder="Hospital Name"
-            value={formData.hospitalName}
-            onChange={handleChange}
-            required
-          />
+        <select
+          name="bloodType"
+          className="form-select mb-3"
+          value={formData.bloodType}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Blood Group</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
 
-          <input
-            type="text"
-            name="location"
-            className="form-control mb-3"
-            placeholder="City / Location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
+        <input
+          type="number"
+          name="unitsRequired"
+          className="form-control mb-3"
+          placeholder="Units Required"
+          min="1"
+          value={formData.unitsRequired}
+          onChange={handleChange}
+          required
+        />
 
-          <select
-            name="bloodType"
-            className="form-select mb-3"
-            value={formData.bloodType}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Blood Group</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
+        <input
+          type="text"
+          name="contactNumber"
+          className="form-control mb-3"
+          placeholder="Contact Number"
+          value={formData.contactNumber}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="number"
-            name="unitsRequired"
-            className="form-control mb-3"
-            placeholder="Units Required"
-            min="1"
-            value={formData.unitsRequired}
-            onChange={handleChange}
-            required
-          />
+        <select
+          name="urgency"
+          className="form-select mb-3"
+          value={formData.urgency}
+          onChange={handleChange}
+        >
+          <option value="Normal">Normal</option>
+          <option value="Urgent">Urgent</option>
+          <option value="Emergency">Emergency</option>
+        </select>
 
-          <input
-            type="text"
-            name="contactNumber"
-            className="form-control mb-3"
-            placeholder="Contact Number"
-            value={formData.contactNumber}
-            onChange={handleChange}
-            required
-          />
+        <label className="form-label">
+          Required Date
+        </label>
 
-          <select
-            name="urgency"
-            className="form-select mb-3"
-            value={formData.urgency}
-            onChange={handleChange}
-          >
-            <option value="Normal">Normal</option>
-            <option value="Urgent">Urgent</option>
-            <option value="Emergency">Emergency</option>
-          </select>
+        <input
+          type="date"
+          name="requiredDate"
+          className="form-control mb-3"
+          value={formData.requiredDate}
+          onChange={handleChange}
+          required
+        />
 
-          <label className="form-label">
-            Required Date
-          </label>
+        <button
+          type="submit"
+          className="btn btn-danger w-100"
+        >
+          Submit Blood Request
+        </button>
+      </form>
 
-          <input
-            type="date"
-            name="requiredDate"
-            className="form-control mb-3"
-            value={formData.requiredDate}
-            onChange={handleChange}
-            required
-          />
-
-          <button
-            type="submit"
-            className="btn btn-danger w-100"
-          >
-            Submit Blood Request
-          </button>
-
-        </form>
-
-        {message && (
-          <div
-            className={`alert ${
-              success
-                ? "alert-success"
-                : "alert-danger"
-            } mt-4`}
-          >
-            {success ? "✅ " : "❌ "}
-            {message}
-          </div>
-        )}
-
-      </div>
+      {message && (
+        <div
+          className={`alert ${
+            success
+              ? "alert-success"
+              : "alert-danger"
+          } mt-4`}
+        >
+          {success ? "✅ " : "❌ "}
+          {message}
+        </div>
+      )}
     </div>
   );
 }

@@ -13,7 +13,6 @@ function Dashboard() {
 
   const [requests, setRequests] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -26,12 +25,9 @@ function Dashboard() {
           throw new Error("Please login to view dashboard.");
         }
 
-        // ===============================
         // Fetch Dashboard Statistics
-        // ===============================
-
         const statsResponse = await fetch(
-          "http://https://blood-donation-backend-xyth.onrender.com/api/dashboard/stats",
+          "https://blood-donation-backend-xyth.onrender.com/api/dashboard/stats",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -55,12 +51,9 @@ function Dashboard() {
           setLastUpdated(statsData.lastUpdated);
         }
 
-        // ===============================
         // Fetch Blood Requests
-        // ===============================
-
         const requestsResponse = await fetch(
-          "http://https://blood-donation-backend-xyth.onrender.com/api/requests",
+          "https://blood-donation-backend-xyth.onrender.com/api/requests",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -79,7 +72,6 @@ function Dashboard() {
         }
 
         setRequests(requestsData.requests || []);
-
         setLoading(false);
       } catch (error) {
         console.error("Dashboard error:", error);
@@ -92,10 +84,7 @@ function Dashboard() {
     fetchDashboard();
   }, []);
 
-  // ===============================
   // Loading
-  // ===============================
-
   if (loading) {
     return (
       <div className="container mt-5 text-center">
@@ -104,10 +93,7 @@ function Dashboard() {
     );
   }
 
-  // ===============================
   // Error
-  // ===============================
-
   if (error) {
     return (
       <div className="container mt-5">
@@ -118,38 +104,24 @@ function Dashboard() {
     );
   }
 
-  // ===============================
   // Dashboard
-  // ===============================
-
   return (
     <div className="container mt-5">
-
-      {/* ===============================
-          TITLE
-      =============================== */}
-
       <h2 className="text-center text-danger mb-2">
         Blood Donation Dashboard
       </h2>
 
       {lastUpdated && (
         <p className="text-center text-muted mb-4">
-          Last updated:{" "}
-          {new Date(lastUpdated).toLocaleString()}
+          Last updated: {new Date(lastUpdated).toLocaleString()}
         </p>
       )}
 
-      {/* ===============================
-          DONOR STATISTICS
-      =============================== */}
-
+      {/* Donor Statistics */}
       <div className="row">
-
         <div className="col-md-4 mb-4">
           <div className="card shadow text-center p-4">
             <h5>Total Donors</h5>
-
             <h2 className="text-danger">
               {stats.totalDonors}
             </h2>
@@ -159,7 +131,6 @@ function Dashboard() {
         <div className="col-md-4 mb-4">
           <div className="card shadow text-center p-4">
             <h5>Available Donors</h5>
-
             <h2 className="text-success">
               {stats.availableDonors}
             </h2>
@@ -169,21 +140,16 @@ function Dashboard() {
         <div className="col-md-4 mb-4">
           <div className="card shadow text-center p-4">
             <h5>Total Requests</h5>
-
             <h2 className="text-danger">
               {stats.totalRequests}
             </h2>
           </div>
         </div>
 
-        {/* ===============================
-            REQUEST STATISTICS
-        =============================== */}
-
+        {/* Request Statistics */}
         <div className="col-md-4 mb-4">
           <div className="card shadow text-center p-4">
             <h5>Pending Requests</h5>
-
             <h2 className="text-warning">
               {stats.pendingRequests}
             </h2>
@@ -193,21 +159,16 @@ function Dashboard() {
         <div className="col-md-4 mb-4">
           <div className="card shadow text-center p-4">
             <h5>Completed Requests</h5>
-
             <h2 className="text-success">
               {stats.completedRequests}
             </h2>
           </div>
         </div>
 
-        {/* ===============================
-            DONATION STATISTICS
-        =============================== */}
-
+        {/* Donation Statistics */}
         <div className="col-md-4 mb-4">
           <div className="card shadow text-center p-4">
             <h5>Total Donations</h5>
-
             <h2 className="text-primary">
               {stats.totalDonations}
             </h2>
@@ -217,21 +178,15 @@ function Dashboard() {
         <div className="col-md-12 mb-4">
           <div className="card shadow text-center p-4">
             <h5>Total Blood Units</h5>
-
             <h2 className="text-danger">
               {stats.totalBloodUnits}
             </h2>
           </div>
         </div>
-
       </div>
 
-      {/* ===============================
-          BLOOD REQUESTS
-      =============================== */}
-
+      {/* Blood Requests */}
       <div className="card shadow mt-3 mb-5">
-
         <div className="card-header bg-danger text-white">
           <h4 className="mb-0">
             🩸 Blood Requests
@@ -239,16 +194,13 @@ function Dashboard() {
         </div>
 
         <div className="card-body">
-
           {requests.length === 0 ? (
             <p className="text-center text-muted">
               No blood requests found.
             </p>
           ) : (
             <div className="table-responsive">
-
               <table className="table table-bordered table-hover">
-
                 <thead>
                   <tr>
                     <th>Patient</th>
@@ -262,13 +214,9 @@ function Dashboard() {
                 </thead>
 
                 <tbody>
-
                   {requests.map((request) => (
                     <tr key={request._id}>
-
-                      <td>
-                        {request.recipientName}
-                      </td>
+                      <td>{request.recipientName}</td>
 
                       <td>
                         <strong className="text-danger">
@@ -276,17 +224,11 @@ function Dashboard() {
                         </strong>
                       </td>
 
-                      <td>
-                        {request.unitsRequired}
-                      </td>
+                      <td>{request.unitsRequired}</td>
 
-                      <td>
-                        {request.hospitalName}
-                      </td>
+                      <td>{request.hospitalName}</td>
 
-                      <td>
-                        {request.location}
-                      </td>
+                      <td>{request.location}</td>
 
                       <td>
                         <span
@@ -315,20 +257,14 @@ function Dashboard() {
                           {request.status}
                         </span>
                       </td>
-
                     </tr>
                   ))}
-
                 </tbody>
-
               </table>
-
             </div>
           )}
-
         </div>
       </div>
-
     </div>
   );
 }

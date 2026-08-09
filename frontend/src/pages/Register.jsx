@@ -23,12 +23,11 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setMessage("");
 
     try {
       const response = await fetch(
-        "http://https://blood-donation-backend-xyth.onrender.com/api/donors",
+        "https://blood-donation-backend-xyth.onrender.com/api/donors",
         {
           method: "POST",
           headers: {
@@ -67,6 +66,7 @@ function Register() {
       }
     } catch (error) {
       console.error("Registration error:", error);
+
       setMessage(
         "Cannot connect to backend. Make sure the backend is running."
       );
@@ -78,126 +78,120 @@ function Register() {
       className="container mt-5"
       style={{ maxWidth: "600px" }}
     >
-      <div className="card shadow p-4">
+      <h2 className="text-center text-danger mb-4">
+        Donor Registration
+      </h2>
 
-        <h2 className="text-center text-danger mb-4">
-          Donor Registration
-        </h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          className="form-control mb-3"
+          placeholder="Full Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
 
-        <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          className="form-control mb-3"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="text"
-            name="name"
-            className="form-control mb-3"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+        <input
+          type="password"
+          name="password"
+          className="form-control mb-3"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="email"
-            name="email"
-            className="form-control mb-3"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+        <input
+          type="text"
+          name="phone"
+          className="form-control mb-3"
+          placeholder="Phone Number"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="password"
-            name="password"
-            className="form-control mb-3"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+        <input
+          type="text"
+          name="city"
+          className="form-control mb-3"
+          placeholder="City"
+          value={formData.city}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="text"
-            name="phone"
-            className="form-control mb-3"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
+        <input
+          type="number"
+          name="age"
+          className="form-control mb-3"
+          placeholder="Age"
+          min="18"
+          value={formData.age}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="text"
-            name="city"
-            className="form-control mb-3"
-            placeholder="City"
-            value={formData.city}
-            onChange={handleChange}
-            required
-          />
+        <input
+          type="number"
+          name="weight"
+          className="form-control mb-3"
+          placeholder="Weight (kg)"
+          min="45"
+          value={formData.weight}
+          onChange={handleChange}
+          required
+        />
 
-          <input
-            type="number"
-            name="age"
-            className="form-control mb-3"
-            placeholder="Age"
-            min="18"
-            value={formData.age}
-            onChange={handleChange}
-            required
-          />
+        <select
+          name="bloodGroup"
+          className="form-select mb-3"
+          value={formData.bloodGroup}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Blood Group</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
 
-          <input
-            type="number"
-            name="weight"
-            className="form-control mb-3"
-            placeholder="Weight (kg)"
-            min="45"
-            value={formData.weight}
-            onChange={handleChange}
-            required
-          />
+        <button
+          type="submit"
+          className="btn btn-danger w-100"
+        >
+          Register
+        </button>
+      </form>
 
-          <select
-            name="bloodGroup"
-            className="form-select mb-3"
-            value={formData.bloodGroup}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Blood Group</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
+      {message === "success" && (
+        <div className="alert alert-success mt-3">
+          ✅ Donor registered successfully!
+        </div>
+      )}
 
-          <button
-            type="submit"
-            className="btn btn-danger w-100"
-          >
-            Register
-          </button>
-
-        </form>
-
-        {message === "success" && (
-          <div className="alert alert-success mt-3">
-            ✅ Donor registered successfully!
-          </div>
-        )}
-
-        {message && message !== "success" && (
-          <div className="alert alert-danger mt-3">
-            ❌ {message}
-          </div>
-        )}
-
-      </div>
+      {message && message !== "success" && (
+        <div className="alert alert-danger mt-3">
+          ❌ {message}
+        </div>
+      )}
     </div>
   );
 }

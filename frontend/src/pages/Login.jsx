@@ -21,12 +21,11 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setMessage("");
 
     try {
       const response = await fetch(
-        "http://https://blood-donation-backend-xyth.onrender.com/api/auth/login",
+        "https://blood-donation-backend-xyth.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {
@@ -48,6 +47,7 @@ function Login() {
 
       // Save login information
       localStorage.setItem("token", data.token);
+
       localStorage.setItem(
         "donor",
         JSON.stringify(data.donor)
@@ -69,6 +69,7 @@ function Login() {
       setTimeout(() => {
         navigate("/");
       }, 800);
+
     } catch (error) {
       console.error("LOGIN ERROR:", error);
 
